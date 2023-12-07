@@ -8,5 +8,9 @@ public class Main {
         getProcessId("cs2.exe");
 
         System.out.println("[CLIENT] - " + pid);
+
+        long moduleBase = new CMemory().getModuleBase(pid,"client.dll");
+                System.out.println("[CLIENT] - " + moduleBase);
+
     }
 }
