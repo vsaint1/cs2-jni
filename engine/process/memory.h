@@ -24,7 +24,7 @@ public:
 
   long get_process_by_name(const char *process_name) {
 
-    LOG("%s",process_name);
+    LOG("%s", process_name);
 
     PROCESSENTRY32 pe;
     HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, m_Pid);
@@ -43,10 +43,42 @@ public:
     if (valid_ts)
       CloseHandle(valid_ts);
 
-    LOG("%d",pid);
-    
+    LOG("%d", pid);
+
     return pid;
   }
+
+  uintptr_t get_module_base(int pid,const char *module_name) {
+    MODULEENTRY32 pe;
+
+    LOG("%s", module_name);
+
+    HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
+
+    uintptr_t module_base = 0;
+
+    if (valid_ts != INVALID_HANDLE_VALUE) {
+      while (Module32Next(valid_ts,&pe)) {
+        if (!strcmp(module_name,pe.szModule)) {
+
+          module_base = reinterpret_cast<uintptr_t>(pe.modBaseAddr);
+          break;
+        }
+      }
+    }
+
+    if (valid_ts)
+      CloseHandle(valid_ts);
+
+    LOG("%p", module_base);
+
+    if (module_base != 0)
+      return module_base;
+
+
+    return false;
+  }
+
 };
 
 inline Memory g_Memory;
