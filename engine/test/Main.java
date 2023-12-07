@@ -9,7 +9,7 @@ public class Main {
 
         System.out.println("[CLIENT] - " + pid);
 
-        long moduleBase = new CMemory().getModuleBase(pid,"client.dll");
+        long moduleBase = new CMemory().getModuleBase("client.dll");
                 System.out.println("[CLIENT] - " + moduleBase);
 
     }

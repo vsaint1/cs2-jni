@@ -26,10 +26,10 @@ JNIEXPORT jlong JNICALL Java_test_CMemory_getProcessId(JNIEnv *p_env, jobject jo
   return process_id;
 }
 
-JNIEXPORT jlong JNICALL Java_test_CMemory_getModuleBase(JNIEnv *p_env, jobject jobj, jint pid, jstring process_name) {
+JNIEXPORT jlong JNICALL Java_test_CMemory_getModuleBase(JNIEnv *p_env, jobject jobj, jstring process_name) {
   const char *native_str = p_env->GetStringUTFChars(process_name, nullptr);
 
-  jlong res = static_cast<jlong>(g_Memory.get_module_base(pid, native_str));
+  jlong res = static_cast<jlong>(g_Memory.get_module_base(native_str));
 
   p_env->ReleaseStringUTFChars(process_name, native_str);
   g_Memory.~Memory();

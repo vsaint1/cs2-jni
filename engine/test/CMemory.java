@@ -12,5 +12,5 @@ public class CMemory {
 
     public native long getProcessId(String processName);
 
-    public native long getModuleBase(long pid,String moduleName);
+    public native long getModuleBase(String moduleName);
 }

@@ -28,32 +28,34 @@ public:
 
     PROCESSENTRY32 pe;
     HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, m_Pid);
-    long pid = 0;
+    m_Pid = 0;
+
 
     if (valid_ts != INVALID_HANDLE_VALUE) {
       while (Process32Next(valid_ts, &pe)) {
         if (!strcmp(process_name, pe.szExeFile)) {
 
-          pid = pe.th32ProcessID;
+          m_Pid = pe.th32ProcessID;
           break;
         }
       }
     }
 
+
     if (valid_ts)
       CloseHandle(valid_ts);
 
-    LOG("%d", pid);
+    LOG("%d", m_Pid);
 
-    return pid;
+    return m_Pid;
   }
 
-  uintptr_t get_module_base(int pid,const char *module_name) {
+  uintptr_t get_module_base(const char *module_name) {
     MODULEENTRY32 pe;
 
     LOG("%s", module_name);
 
-    HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pid);
+    HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, m_Pid);
 
     uintptr_t module_base = 0;
 
