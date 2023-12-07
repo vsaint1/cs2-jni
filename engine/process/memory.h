@@ -22,7 +22,7 @@ public:
       CloseHandle(m_Handle);
   }
 
-  long get_process_by_id(const char *process_name) {
+  long get_process_by_name(const char *process_name) {
 
     LOG("%s",process_name);
 
