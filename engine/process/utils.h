@@ -1,3 +1,5 @@
+#define DLL_EXPORT
+
 #ifdef _DEBUG
 #define LOG(fmt, ...) \
     do { \
@@ -8,6 +10,15 @@
 #endif
 
 
+#ifdef _WIN32
+    #ifdef DLL_EXPORT
+        #define ENGINE_API __declspec(dllexport)
+    #else
+        #define ENGINE_API __declspec(dllimport)
+    #endif
+#else
+    #define ENGINE_API
+#endif
 
 #ifdef _DEBUG
 #define JZ(x) if(x == 0) printf("[ERROR] - %s returned 0 on file %s at line %d \n",#x,__FILE__,__LINE__)
