@@ -24,12 +24,11 @@ public:
 
   long get_process_by_name(const char *process_name) {
 
-    LOG("%s", process_name);
+    LOG("process_name: %s", process_name);
 
     PROCESSENTRY32 pe;
     HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, m_Pid);
     m_Pid = 0;
-
 
     if (valid_ts != INVALID_HANDLE_VALUE) {
       while (Process32Next(valid_ts, &pe)) {
@@ -41,11 +40,10 @@ public:
       }
     }
 
-
     if (valid_ts)
       CloseHandle(valid_ts);
 
-    LOG("%d", m_Pid);
+    LOG("pid: %d", m_Pid);
 
     return m_Pid;
   }
@@ -53,15 +51,15 @@ public:
   uintptr_t get_module_base(const char *module_name) {
     MODULEENTRY32 pe;
 
-    LOG("%s", module_name);
+    LOG("module_name: %s", module_name);
 
     HANDLE valid_ts = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, m_Pid);
 
     uintptr_t module_base = 0;
 
     if (valid_ts != INVALID_HANDLE_VALUE) {
-      while (Module32Next(valid_ts,&pe)) {
-        if (!strcmp(module_name,pe.szModule)) {
+      while (Module32Next(valid_ts, &pe)) {
+        if (!strcmp(module_name, pe.szModule)) {
 
           module_base = reinterpret_cast<uintptr_t>(pe.modBaseAddr);
           break;
@@ -72,11 +70,24 @@ public:
     if (valid_ts)
       CloseHandle(valid_ts);
 
-    LOG("%p", module_base);
+    LOG("module_base: %llu", module_base);
 
     if (module_base != 0)
       return module_base;
 
+    return false;
+  }
+
+  template <typename T> T readv(uintptr_t address) {
+    T buffer{};
+    m_ReadVM(m_Handle, (void *)address, &buffer, sizeof(T), 0);
+    return buffer;
+  }
+
+  bool read_raw(uintptr_t address, void *buffer, size_t size) {
+    ULONG bytes_read;
+    if (m_ReadVM(m_Handle, (void *)address, &buffer, static_cast<ULONG>(size - 1), &bytes_read))
+      return bytes_read == size;
 
     return false;
   }
