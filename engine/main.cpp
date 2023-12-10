@@ -5,7 +5,6 @@
 #include "overlay/render.h"
 #include "features/cheat.h"
 
-
 // LANG_PACKAGE_CLASSNAME_FUNCTION(args,...)
 
 // Ljava/lang/String - String.class
@@ -48,6 +47,27 @@ JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEngine_start(JNIEnv *p_env,
   init_wndparams(own_hwnd);
   std::thread(cache_entities).detach();
   main_loop();
+}
+
+JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CAimbotConfig_configure(JNIEnv *p_env, jobject jobj) {
+  LOG("Configure");
+  jclass clazz = p_env->GetObjectClass(jobj);
+  LOG("Class: %p", clazz);
+  if (clazz == nullptr)
+    return;
+
+  settings::aimbot::aim_fov = p_env->GetFloatField(jobj, p_env->GetFieldID(clazz, "aimFov", "F"));
+  LOG("Aim fov: %f", settings::aimbot::aim_fov);
+  settings::aimbot::smooth = p_env->GetIntField(jobj, p_env->GetFieldID(clazz, "smooth", "I"));
+  LOG("Smooth: %d", settings::aimbot::smooth);
+  settings::aimbot::selectedhitbox = p_env->GetIntField(jobj, p_env->GetFieldID(clazz, "selectedHitbox", "I"));
+  LOG("Selected hitbox: %d", settings::aimbot::selectedhitbox);
+  settings::aimbot::aimbot = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "aimbot", "Z"));
+  LOG("Aimbot: %d", settings::aimbot::aimbot);
+  settings::aimbot::visible_check = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "visibleCheck", "Z"));
+  LOG("Visible check: %d", settings::aimbot::visible_check);
+  settings::aimbot::fov_circle = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "fovCircle", "Z"));
+  LOG("Fov circle: %d", settings::aimbot::fov_circle);
 }
 
 JNIEXPORT void JNICALL Java_test_CMemory_cleanup(JNIEnv *p_env, jobject jobj) { process.~Memory(); }
