@@ -1,7 +1,5 @@
 package test;
 
-
-
 public class Main {
 
     public static void main(String[] args) {
@@ -18,6 +16,8 @@ public class Main {
         for (CEntity entity : entities) {
             System.out.println(entity.toString());
         }
+
+        new CMemory().start();
 
     }
 }

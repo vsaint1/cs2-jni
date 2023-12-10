@@ -4,10 +4,10 @@ import java.io.File;
 
 public class CMemory {
     private static String FILE_NAME = "engine.dll";
- 
+
     static {
         System.load(System.getProperty("user.dir") + File.separatorChar + "build" + File.separatorChar
-                + File.separatorChar + "Debug" + File.separatorChar + "engine.dll");
+                + "engine" + File.separatorChar + "Debug" + File.separatorChar + "engine.dll");
     }
 
     public native CEntity[] getEntities();
@@ -16,6 +16,6 @@ public class CMemory {
 
     public native long getModuleBase(String moduleName);
 
-    
+    public native void start();
 
 }
