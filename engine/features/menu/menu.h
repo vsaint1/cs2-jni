@@ -128,14 +128,17 @@ void draw_menu() {
   if (ImGui::BeginTabItem(("Aimbot"))) {
     ImGui::Checkbox("Enabled", &settings::aimbot::aimbot);
     set_helper("Enable/Disable Aimbot");
-    ImGui::SliderFloat("FOV", &settings::aimbot::aim_fov, 0.f, 100.f, "%.0f");
-    ImGui::Checkbox("Visible Check", &settings::aimbot::visible_check);
-    set_helper("Enable/Disable Visible Check");
-    ImGui::SliderInt("Smooth", &settings::aimbot::smooth, 0, 10, "%d");
-    set_helper("Humanize your aimbot");
     ImGui::Checkbox("Draw FOV", &settings::aimbot::fov_circle);
     set_helper("Enable/Disable FOV Circle");
+    ImGui::Checkbox("Visible Check", &settings::aimbot::visible_check);
+    set_helper("Enable/Disable Visible Check");
+    ImGui::SliderFloat("FOV", &settings::aimbot::aim_fov, 0.f, 100.f, "%.0f");
+	set_helper("Aimbot field of view");
+    ImGui::SliderInt("Smooth", &settings::aimbot::smooth, 0, 10, "%d");
+    set_helper("Humanize your aimbot");
+
     ImGui::Combo("Bone", &settings::aimbot::selectedhitbox, settings::aimbot::hitbox, IM_ARRAYSIZE(settings::aimbot::hitbox));
+	set_helper("Select the bone you want to aim at");
     hotkey_button(hotkeys::aimkey, change_key, keystatus);
 
     ImGui::EndTabItem();
