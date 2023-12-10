@@ -10,7 +10,7 @@ public class WebApplication {
 
 	public static void main(String[] args) {
 		CEngine engine = new CEngine();
-		SpringApplication.run(WebApplication.class, args);
+		//SpringApplication.run(WebApplication.class, args);
 		engine.start();
 
 	}

@@ -1,15 +1,17 @@
 #include <Windows.h>
-#include <d3d9.h>
 #include <d3dx9.h>
+#include <d3d9.h>
 #include <d3dx9tex.h>
 #include <dwmapi.h>
 
 #include "../external/includes/imgui/imgui_internal.h"
-
 #include "../external/includes/imgui/imgui.h"
-#include "../external/includes/imgui/imgui_impl_dx9.h"
 #include "../external/includes/imgui/imgui_impl_win32.h"
+#include "../external/includes/imgui/imgui_impl_dx9.h"
 #include "../features/globals.h"
+#include "logo.h"
+#include "../features/menu/menu.h"
+#include "../features/cheat.h"
 
 IDirect3D9Ex *p_Object = NULL;
 IDirect3DDevice9Ex *p_Device = NULL;
@@ -20,6 +22,7 @@ HWND game_hwnd = NULL;
 MSG Message = {NULL};
 
 RECT game_rect = {NULL};
+D3DPRESENT_PARAMETERS d3dpp;
 
 struct screen_center {
   DWORD x, y;
@@ -103,12 +106,10 @@ void cleanup() {
     p_Device->Release();
     p_Device = NULL;
   }
-
   if (p_Object) {
     p_Object->Release();
     p_Object = NULL;
   }
-
   ImGui_ImplDX9_Shutdown();
   ImGui_ImplWin32_Shutdown();
   ImGui::DestroyContext();
@@ -118,7 +119,7 @@ void cleanup() {
 
 void set_window_target() {
   while (true) {
-    game_hwnd = get_process_wnd(pid);
+    game_hwnd = get_process_wnd(processid);
     if (game_hwnd) {
       ZeroMemory(&game_rect, sizeof(game_rect));
       GetWindowRect(game_hwnd, &game_rect);
@@ -137,13 +138,13 @@ void setup_window() {
     CloseHandle(Windowthread);
 
   WNDCLASSEXA wcex = {
-      sizeof(WNDCLASSEXA), 0, DefWindowProcA, 0, 0, nullptr, LoadIcon(nullptr, IDI_APPLICATION), LoadCursor(nullptr, IDC_ARROW), nullptr, nullptr, ("jni"), LoadIcon(nullptr, IDI_APPLICATION)};
+      sizeof(WNDCLASSEXA), 0, DefWindowProcA, 0, 0, nullptr, LoadIcon(nullptr, IDI_APPLICATION), LoadCursor(nullptr, IDC_ARROW), nullptr, nullptr, ("infs"), LoadIcon(nullptr, IDI_APPLICATION)};
 
   GetWindowRect(GetDesktopWindow(), &Rect);
 
   RegisterClassExA(&wcex);
 
-  own_hwnd = CreateWindowExA(NULL, ("jni"), ("jni"), WS_POPUP, Rect.left, Rect.top, Rect.right, Rect.bottom, NULL, NULL, wcex.hInstance, NULL);
+  own_hwnd = CreateWindowExA(NULL, ("infs"), ("infs"), WS_POPUP, Rect.left, Rect.top, Rect.right, Rect.bottom, NULL, NULL, wcex.hInstance, NULL);
   SetWindowLong(own_hwnd, GWL_EXSTYLE, WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
   SetLayeredWindowAttributes(own_hwnd, RGB(0, 0, 0), 255, LWA_ALPHA);
 
@@ -160,13 +161,8 @@ void render() {
   ImGui_ImplWin32_NewFrame();
   ImGui::NewFrame();
 
-  ImGui::Begin("CS2 - JNI", NULL, ImGuiWindowFlags_NoResize);
-  ImGui::SetWindowPos(ImVec2((width / 2) - 250, (height / 2) - 150), ImGuiCond_Always);
-  ImGui::SetWindowSize(ImVec2(500, 300), ImGuiCond_Always);
-
-  ImGui::Text("JNI OVERLAY TEST");
-
-  ImGui::End();
+  entity_loop();
+  draw_menu();
 
   ImGui::EndFrame();
   p_Device->SetRenderState(D3DRS_ZENABLE, false);
@@ -184,7 +180,7 @@ void render() {
 
   if (result == D3DERR_DEVICELOST && p_Device->TestCooperativeLevel() == D3DERR_DEVICENOTRESET) {
     ImGui_ImplDX9_InvalidateDeviceObjects();
-    p_Device->Reset(&p_Params);
+    p_Device->Reset(&d3dpp);
     ImGui_ImplDX9_CreateDeviceObjects();
   }
 }
@@ -205,7 +201,7 @@ WPARAM main_loop() {
     }
 
     HWND hwnd_active = GetForegroundWindow();
-    if (GetAsyncKeyState(VK_END) & 1)
+    if (GetAsyncKeyState(0x23) & 1)
       exit(0);
 
     if (hwnd_active == game_hwnd) {
@@ -231,7 +227,7 @@ WPARAM main_loop() {
     io.MousePos.x = p.x - xy.x;
     io.MousePos.y = p.y - xy.y;
 
-    if (GetAsyncKeyState(VK_LBUTTON)) {
+    if (GetAsyncKeyState(0x1)) {
       io.MouseDown[0] = true;
       io.MouseClicked[0] = true;
       io.MouseClickedPos[0].x = io.MousePos.x;
