@@ -3,6 +3,8 @@
 #include <jni/jni.h>
 #include <vector>
 #include "Entity.h"
+#include "overlay/render.h"
+
 
 
 // LANG_PACKAGE_CLASSNAME_FUNCTION(args,...)
@@ -32,6 +34,27 @@ extern "C" {
 
 //   return process_id;
 // }
+
+JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEngine_start(JNIEnv *p_env, jobject jobj) {
+
+ while (entry_hwnd == NULL) {
+		LOG("Start the game");
+		pid = process.get_procid();
+		entry_hwnd = get_process_wnd(pid);
+	}
+
+
+	client = process.get_modulebase("client.dll");
+
+
+	setup_window();
+	init_wndparams(own_hwnd);
+	main_loop();
+}
+
+JNIEXPORT void JNICALL Java_test_CMemory_cleanup(JNIEnv *p_env, jobject jobj) {
+  process.~Memory();
+}
 
 JNIEXPORT jlong JNICALL Java_test_CMemory_getProcessId(JNIEnv *p_env, jobject jobj) {
 
@@ -84,6 +107,7 @@ JNIEXPORT jobjectArray JNICALL Java_test_CMemory_getEntities(JNIEnv *p_env, jobj
 
     return entities;
 }
+
 
 }
 
