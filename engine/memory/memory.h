@@ -1,7 +1,7 @@
 #pragma once
 #include "../process/utils.h"
 #include <string> 
-#include <Windows.h>
+#include "handle_hijack.h"
 #include <TlHelp32.h>
 
 typedef NTSTATUS(WINAPI* pNtReadVirtualMemory)(HANDLE ProcessHandle, PVOID BaseAddress, PVOID Buffer, ULONG NumberOfBytesToRead, PULONG NumberOfBytesRead);
@@ -93,7 +93,7 @@ public:
 				{
 					if (!proces_name.compare(pe.szExeFile))
 					{
-						handle = OpenProcess(PROCESS_VM_READ, FALSE, pe.th32ProcessID);
+						handle = hj::HijackExistingHandle(pe.th32ProcessID);
 						break;
 
 
