@@ -33,7 +33,7 @@ void draw_healthbar(FVector3 screen_pos, int health) {
 
 void draw_skeleton(uintptr_t bonearray, view_matrix_t view_matrix) {
 
- static int bone_index = 32;
+ 	static int bone_index = 32;
 	FVector3 head = process.readv<FVector3>(bonearray + EBone::Head * bone_index).world_to_screen(view_matrix);
 	FVector3 neck = process.readv<FVector3>(bonearray + EBone::Neck * bone_index).world_to_screen(view_matrix);
 	FVector3 right_shoulder = process.readv<FVector3>(bonearray + EBone::RightShoulder * bone_index).world_to_screen(view_matrix);
@@ -48,7 +48,7 @@ void draw_skeleton(uintptr_t bonearray, view_matrix_t view_matrix) {
 	FVector3 right_foot = process.readv<FVector3>(bonearray + EBone::RightFoot * bone_index).world_to_screen(view_matrix);
 	FVector3 left_foot = process.readv<FVector3>(bonearray + EBone::LeftFoot * bone_index).world_to_screen(view_matrix);
 
-	ImGui::GetBackgroundDrawList()->AddLine({ head.x, head.y }, { neck.x, neck.y }, ImColor(255, 0, 0, 255));
+	ImGui::GetBackgroundDrawList()->AddCircle({ head.x, head.y }, 3, ImColor(255, 0, 0, 255));
 	ImGui::GetBackgroundDrawList()->AddLine({ neck.x, neck.y }, { right_shoulder.x, right_shoulder.y }, ImColor(255, 0, 0, 255));
 	ImGui::GetBackgroundDrawList()->AddLine({ neck.x, neck.y }, { left_shoulder.x, left_shoulder.y }, ImColor(255, 0, 0, 255));
 	ImGui::GetBackgroundDrawList()->AddLine({ right_shoulder.x, right_shoulder.y }, { right_arm.x, right_arm.y }, ImColor(255, 0, 0, 255));
