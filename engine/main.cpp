@@ -50,7 +50,7 @@ JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEngine_start(JNIEnv *p_env,
 }
 
 JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CAimbotConfig_configure(JNIEnv *p_env, jobject jobj) {
-  LOG("Configure");
+  LOG("AIMBOT Configure");
   jclass clazz = p_env->GetObjectClass(jobj);
   LOG("Class: %p", clazz);
   if (clazz == nullptr)
@@ -73,7 +73,7 @@ JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CAimbotConfig_configure(JNIE
 }
 
 JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEspConfig_configure(JNIEnv *p_env, jobject jobj) {
-  LOG("Configure");
+  LOG("ESP Configure");
   jclass clazz = p_env->GetObjectClass(jobj);
   LOG("Class: %p", clazz);
   if (clazz == nullptr)
@@ -107,6 +107,12 @@ JNIEXPORT jlong JNICALL Java_test_CMemory_getProcessId(JNIEnv *p_env, jobject jo
   process.~Memory();
 
   return process_id;
+}
+
+JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEngine_stop(JNIEnv *p_env, jobject jobj) {
+  LOG("Stop");
+
+  exit(0);
 }
 
 JNIEXPORT jlong JNICALL Java_test_CMemory_getModuleBase(JNIEnv *p_env, jobject jobj, jstring process_name) {
