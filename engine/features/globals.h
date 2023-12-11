@@ -57,7 +57,7 @@ bool bName = false;
 bool bSnaplines = false;
 bool bDistance = false;
 bool bBox = false;
-bool distance = false;
+bool bWeapon = false;
 
 }; // namespace visuals
 
