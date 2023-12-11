@@ -97,7 +97,19 @@ JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEspConfig_configure(JNIEnv 
   LOG("Weapon: %d", settings::visuals::bWeapon);
 
 }
+JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CMiscConfig_configure(JNIEnv *p_env, jobject jobj) {
+   LOG("Misc Configure");
+  jclass clazz = p_env->GetObjectClass(jobj);
+  LOG("Class: %p", clazz);
+  if (clazz == nullptr)
+    return;
 
+  settings::misc::bTeamcheck = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "teamCheck", "Z"));
+  LOG("Team check: %d", settings::misc::bTeamcheck);
+  settings::misc::bWatermark = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "watermark", "Z"));
+  LOG("Watermark: %d", settings::misc::bWatermark);
+  
+}
 JNIEXPORT void JNICALL Java_test_CMemory_cleanup(JNIEnv *p_env, jobject jobj) { process.~Memory(); }
 
 JNIEXPORT jlong JNICALL Java_test_CMemory_getProcessId(JNIEnv *p_env, jobject jobj) {
