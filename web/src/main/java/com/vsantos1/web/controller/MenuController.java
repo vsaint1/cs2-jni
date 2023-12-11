@@ -7,25 +7,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vsantos1.web.engine.CAimbotConfig;
+import com.vsantos1.web.engine.CEngine;
+import com.vsantos1.web.engine.CEspConfig;
 
 @Controller
 public class MenuController {
 
     @GetMapping("/menu")
-    public ModelAndView menu() {
-        CAimbotConfig config = new CAimbotConfig();
+    public ModelAndView menu(CAimbotConfig aimConfig, CEspConfig espConfig) {
+
         ModelAndView mv = new ModelAndView("views/menu");
-        mv.addObject("config", config);
+        mv.addObject("aimConfig", aimConfig);
+        mv.addObject("espConfig", espConfig);
+
         return mv;
 
     }
 
     @PostMapping("/save-config")
-    public String config(@ModelAttribute CAimbotConfig config) {
+    public ModelAndView config(@ModelAttribute CAimbotConfig aimConfig, @ModelAttribute CEspConfig espConfig) {
 
-        config.configure();
-        return "redirect:/menu";
+        aimConfig.configure();
+        espConfig.configure();
 
+        return new ModelAndView("redirect:/menu");
+
+    }
+
+    @PostMapping("/unload")
+    public void unload() {
+        CEngine engine = new CEngine();
+        engine.stop();
     }
 
 }
