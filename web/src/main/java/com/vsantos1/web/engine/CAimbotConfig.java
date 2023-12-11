@@ -10,6 +10,8 @@ public class CAimbotConfig {
     private boolean fovCircle;
     private int smooth;
     private int selectedHitbox;
+    private int selectedKey;
+
     private static String FILE_NAME = "engine.dll";
 
     static {
@@ -68,6 +70,26 @@ public class CAimbotConfig {
         this.selectedHitbox = selectedHitbox;
     }
 
+    
+    public int getSelectedKey() {
+        return selectedKey;
+    }
+
+    public void setSelectedKey(int selectedKey) {
+        this.selectedKey = selectedKey;
+    }
+
     public native void configure();
 
+    @Override
+    public String toString() {
+        return "CAimbotConfig [aimbot=" + aimbot + ", visibleCheck=" + visibleCheck + ", aimFov=" + aimFov
+                + ", fovCircle=" + fovCircle + ", smooth=" + smooth + ", selectedHitbox=" + selectedHitbox
+                + ", selectedKey=" + selectedKey + "]";
+    }
+
+   
+
+    
+    
 }

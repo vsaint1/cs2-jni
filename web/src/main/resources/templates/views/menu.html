@@ -10,30 +10,69 @@
 
 </head>
 
-<body>
-    <h1 class="test">Web Angola menu</h1>
- <img th:src="@{/img/cs2.webp}" width="100" alt="fds"/>
+<body class="bg-body">
+    <h1 class="text-black-50">Web Angola menu</h1>
+    <p class="text-muted">This is a simple menu for the Web cheat</p>
+    <div class="container-md">
+    <img  th:src="@{/img/cs2.webp}" width="100" alt="fds" />
 
-    <div class="container">
-        <form  method="POST" th:action="@{/save-config}" class="container">
+        <form method="POST" th:action="@{/save-config}" >
             <h1 class="text-muted">Aimbot</h1>
             <div class="col-md-2">
                 <div class="form-group">
                     <input type="checkbox" id="aimbot" name="aimbot">
                     <label for="aimbot">Enabled</label>
                 </div>
-                    <input type="checkbox" id="visibleCheck" name="visibleCheck">
-                    <label for="visibleCheck">Visible Check</label>
+                <div class="form-group">
+                    <label for="selectedHitbox">Key</label>
+                    <select class="form-control" id="selectedKey" name="selectedKey">
+                        <option value="1">Left Mouse</option>
+                        <option value="2">Right Mouse</option>
+                        <option value="4">Middle Mouse</option>
+                        <option value="5">Mouse 5</option>
+                        <option value="6">Mouse 4</option>
+                        <option value="17">Shift</option>
+                        <option value="18">Control</option>
+                        <option value="19">Alt</option>
+                        <option value="21">Capslock</option>
+                    </select>
+                </div>
+        
+                <div class="form-group">
+                    <label for="selectedHitbox">Bone</label>
+                    <select class="form-control" id="selectedHitbox" name="selectedHitbox">
+                        <option value="0">Head</option>
+                        <option value="1">Chest</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="aimFov">Aim Fov</label>
-                    <input type="range" value="0" min="1" max="100" oninput="this.nextElementSibling.value = this.value"
-                        id="aimFov"  name="aimFov">
-                    <output>0</output>
+                    <input type="checkbox" id="visibleCheck" name="visibleCheck">
+                    <label for="visibleCheck">Visible Check</label>
+
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <div class="form-group">
+                    <input type="checkbox" id="fovCircle" name="fovCircle">
+                    <label for="fovCircle">Draw Fov</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="aimFov">Aim Fov</label>
+                <input class="form-range form-control-sm" type="range" value="0" min="1" max="100"
+                    oninput="this.nextElementSibling.value = this.value" id="aimFov" name="aimFov">
+                <output>0</output>
+            </div>
+            <div class="form-group">
+                <label for="smooth">Smoothness</label>
+                <input class="form-range form-control-sm" type="range" value="0" min="1" max="10"
+                    oninput="this.nextElementSibling.value = this.value" id="smooth" name="smooth">
+                <output>0</output>
+            </div>
+            <div class="form-group">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Save Config</button>
         </form>
-        
+
 </body>
 
 </html>
