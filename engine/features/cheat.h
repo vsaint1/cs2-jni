@@ -79,6 +79,9 @@ void cache_entities() {
 }
 
 void entity_loop() {
+   if (settings::aimbot::fov_circle)
+    ImGui::GetBackgroundDrawList()->AddCircle(ImVec2(width / 2, height / 2), settings::aimbot::aim_fov, ImColor(255, 255, 255, 255), 100);
+    
   if (settings::misc::bWatermark)
     draw_watermark("JNI ENGINE MADE FROM ANGOLA", ImVec2(200, 10), ImColor(255, 255, 255, 255));
 
