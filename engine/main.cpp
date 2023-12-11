@@ -33,6 +33,13 @@ extern "C" {
 //   return process_id;
 // }
 
+JNIEXPORT long JNICALL Java_com_vsantos1_web_engine_CEngine_getProcessId(JNIEnv *p_env, jobject jobj) {
+  LOG("PID");
+  long process_id = process.get_procid();
+  LOG("Process id: %d", process_id);
+  return static_cast<jlong>(process_id);
+
+}
 JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEngine_start(JNIEnv *p_env, jobject jobj) {
 
   while (entry_hwnd == NULL) {
