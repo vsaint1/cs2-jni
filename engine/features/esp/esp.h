@@ -13,7 +13,7 @@ void draw_esp(FVector3 pos, FVector3 screen_pos, Entity entity, uintptr_t  bone_
 
 		if (settings::visuals::esp) {
 
-			if (settings::visuals::distance)
+			if (settings::visuals::bDistance)
 				draw_distance(screen_pos, entity.position);
 
 			if (settings::visuals::bSnaplines)
