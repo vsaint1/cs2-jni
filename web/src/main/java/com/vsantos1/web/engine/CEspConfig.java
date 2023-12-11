@@ -2,13 +2,13 @@ package com.vsantos1.web.engine;
 
 public class CEspConfig {
 
-    private boolean esp;
+    private boolean esp = true;
     private boolean snapLines;
-    private boolean health;
+    private boolean health = true;
     private boolean box;
     private boolean name;
     private boolean distance;
-    private boolean skeleton;
+    private boolean skeleton = true;
     private boolean weapon;
 
     public CEspConfig() {
