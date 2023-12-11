@@ -11,68 +11,145 @@
 </head>
 
 <body class="bg-body">
-    <h1 class="text-black-50">Web Angola menu</h1>
-    <p class="text-muted">This is a simple menu for the Web cheat</p>
+    <div class="container-md m-2">
+
+        <h1 class="text-black-50">Web Angola menu</h1>
+        <p class="text-muted">This is a simple menu for the Web cheat</p>
+        <p class="text-muted">@vsantos1
+            <a href="https://github.com/vsaint1" class="btn-link">Github</a>
+        </p>
+    </div>
+
     <div class="container-md">
-    <img  th:src="@{/img/cs2.webp}" width="100" alt="fds" />
 
-        <form method="POST" th:action="@{/save-config}" >
+        <p class="text-danger">
+            <img th:src="@{/img/cs2.webp}" width="100" alt="fds" />
+            1234
+        </p>
+        <form method="post" th:action="@{/unload}">
+            <button type="submit" class="my-2 btn btn-danger">Unload</button>
+        </form>
+        <form method="POST" id="config-form" th:action="@{/save-config}" class="container">
             <h1 class="text-muted">Aimbot</h1>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <input type="checkbox" id="aimbot" name="aimbot">
-                    <label for="aimbot">Enabled</label>
-                </div>
-                <div class="form-group">
-                    <label for="selectedHitbox">Key</label>
-                    <select class="form-control" id="selectedKey" name="selectedKey">
-                        <option value="1">Left Mouse</option>
-                        <option value="2">Right Mouse</option>
-                        <option value="4">Middle Mouse</option>
-                        <option value="5">Mouse 5</option>
-                        <option value="6">Mouse 4</option>
-                        <option value="17">Shift</option>
-                        <option value="18">Control</option>
-                        <option value="19">Alt</option>
-                        <option value="21">Capslock</option>
-                    </select>
-                </div>
-        
-                <div class="form-group">
-                    <label for="selectedHitbox">Bone</label>
-                    <select class="form-control" id="selectedHitbox" name="selectedHitbox">
-                        <option value="0">Head</option>
-                        <option value="1">Chest</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="visibleCheck" name="visibleCheck">
-                    <label for="visibleCheck">Visible Check</label>
 
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <input type="checkbox" id="aimbot" name="aimbot" th:field="${aimConfig.aimbot}">
+                                <label for="aimbot">Enabled</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="selectedHitbox">Key</label>
+                                <select class="form-control" id="selectedKey" name="selectedKey">
+                                    <option value="6">Mouse 4</option>
+                                    <option value="5">Mouse 5</option>
+                                    <option value="1">Left Mouse</option>
+                                    <option value="2">Right Mouse</option>
+                                    <option value="4">Middle Mouse</option>
+                                    <option value="17">Shift</option>
+                                    <option value="18">Control</option>
+                                    <option value="19">Alt</option>
+                                    <option value="21">Capslock</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="selectedHitbox">Bone</label>
+                                <select class="form-control" id="selectedHitbox" name="selectedHitbox">
+                                    <option value="0">Head</option>
+                                    <option value="1">Chest</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="visibleCheck" name="visibleCheck"
+                                    th:field="${aimConfig.visibleCheck}">
+                                <label for="visibleCheck">Visible Check</label>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="fovCircle" name="fovCircle"
+                                    th:field="${aimConfig.fovCircle}">
+                                <label for="fovCircle">Draw Fov</label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="aimFov">Aim Fov</label>
+                                <input class="form-range form-control-sm" type="range" value="0" min="1" max="100"
+                                    oninput="this.nextElementSibling.value = this.value" id="aimFov" name="aimFov"
+                                    th:field="${aimConfig.aimFov}">
+                                <output>0</output>
+                            </div>
+                            <div class="form-group">
+                                <label for="smooth">Smoothness</label>
+                                <input class="form-range form-control-sm" type="range" value="0" min="0" max="10"
+                                    oninput="this.nextElementSibling.value = this.value" id="smooth" name="smooth"
+                                    th:field="${aimConfig.smooth}">
+                                <output>0</output>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <h1 class="text-muted">ESP</h1>
+                            <div class="form-group">
+                                <input type="checkbox" id="esp" name="esp" th:field="${espConfig.esp}">
+                                <label for="esp">Enabled</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="box" name="box" th:field="${espConfig.box}">
+                                <label for="box">Box</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="skeleton" name="skeleton" th:field="${espConfig.skeleton}">
+                                <label for="skeleton">Skeleton</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="name" name="name" th:field="${espConfig.name}">
+                                <label for="name">Name</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="health" name="health" th:field="${espConfig.health}">
+                                <label for="health">Health</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="distance" name="distance" th:field="${espConfig.distance}">
+                                <label for="distance">Distance</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="weapon" name="weapon" th:field="${espConfig.weapon}">
+                                <label for="weapon">Weapon</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="snapLines" name="snapLines"
+                                    th:field="${espConfig.snapLines}">
+                                <label for="snapLines">Snaplines</label>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <h1 class="text-muted">MISC</h1>
+                            <div class="form-group">
+                                <input type="checkbox" id="teamCheck" name="teamCheck"
+                                    th:field="${miscConfig.teamCheck}">
+                                <label for="teamCheck">Team-Check</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" id="watermark" name="watermark"
+                                    th:field="${miscConfig.watermark}">
+                                <label for="watermark">Watermark</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="checkbox" id="fovCircle" name="fovCircle">
-                    <label for="fovCircle">Draw Fov</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="aimFov">Aim Fov</label>
-                <input class="form-range form-control-sm" type="range" value="0" min="1" max="100"
-                    oninput="this.nextElementSibling.value = this.value" id="aimFov" name="aimFov">
-                <output>0</output>
-            </div>
-            <div class="form-group">
-                <label for="smooth">Smoothness</label>
-                <input class="form-range form-control-sm" type="range" value="0" min="1" max="10"
-                    oninput="this.nextElementSibling.value = this.value" id="smooth" name="smooth">
-                <output>0</output>
-            </div>
-            <div class="form-group">
 
             </div>
+
             <button type="submit" class="btn btn-primary">Save Config</button>
+
         </form>
 
 </body>
+<script th:src="@{/js/config.js}"></script>
 
 </html>
