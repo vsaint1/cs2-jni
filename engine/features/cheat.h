@@ -25,7 +25,7 @@ void cache_entities() {
     uintptr_t entity_list = process.readv<uintptr_t>(client + offsets::dwEntityList);
 
     for (int i = 1; i < 32; i++) {
-      uintptr_t list_entry = process.readv<uintptr_t>(entity_list + (8 * (i & 0x7FFF) >> 9) + 16); // if csgo 0x8
+      uintptr_t list_entry = process.readv<uintptr_t>(entity_list + (8 * (i & 0x7FFF) >> 9) + 16); 
       if (!list_entry)
         continue;
 

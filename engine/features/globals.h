@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <cstddef>
 
 HWND entry_hwnd = NULL;
 int processid = 0;
