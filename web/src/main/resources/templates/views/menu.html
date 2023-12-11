@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNI - Web Menu</title>
+    <link rel="icon" th:href="@{/img/favicon.ico}" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/bootstrap.css}" type="text/css" />
+
+</head>
+
+<body>
+    <h1 class="test">Web Angola menu</h1>
+ <img th:src="@{/img/cs2.webp}" width="100" alt="fds"/>
+
+    <div class="container">
+        <form  method="POST" th:action="@{/save-config}" class="container">
+            <h1 class="text-muted">Aimbot</h1>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input type="checkbox" id="aimbot" name="aimbot">
+                    <label for="aimbot">Enabled</label>
+                </div>
+                    <input type="checkbox" id="visibleCheck" name="visibleCheck">
+                    <label for="visibleCheck">Visible Check</label>
+                </div>
+                <div class="form-group">
+                    <label for="aimFov">Aim Fov</label>
+                    <input type="range" value="0" min="1" max="100" oninput="this.nextElementSibling.value = this.value"
+                        id="aimFov"  name="aimFov">
+                    <output>0</output>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        
+</body>
+
+</html>
