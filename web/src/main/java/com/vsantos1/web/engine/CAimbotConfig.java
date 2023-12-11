@@ -4,20 +4,14 @@ import java.io.File;
 
 public class CAimbotConfig {
 
-    private boolean aimbot;
-    private boolean visibleCheck;
-    private float aimFov;
-    private boolean fovCircle;
-    private int smooth;
-    private int selectedHitbox;
-    private int selectedKey;
+    private boolean aimbot = true;
+    private boolean visibleCheck = true;
+    private float aimFov = 30.0f;
+    private boolean fovCircle = true;
+    private int smooth = 0;
+    private int selectedHitbox = 0; // 0 - HEAD  | 1 - CHEST
+    private int selectedKey = 6; // 6 - MOUSE 4 | 5 - MOUSE 5 
 
-    private static String FILE_NAME = "engine.dll";
-
-    static {
-        System.load(System.getProperty("user.dir") + File.separatorChar + "build" + File.separatorChar
-                + "engine" + File.separatorChar + "Debug" + File.separatorChar + "engine.dll");
-    }
 
     public CAimbotConfig() {
     }
