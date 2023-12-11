@@ -36,7 +36,7 @@ std::ptrdiff_t iIDEntIndex = 0x153C;          // m_iIDEntIndex = 0x153C;
 
 namespace settings {
 
-inline bool bMenu = true;
+inline bool bMenu = false;
 namespace aimbot {
 bool aimbot = true;
 bool visible_check = false;
@@ -103,7 +103,7 @@ static const char *key_names[] = {
     "Enter",
     "",
     "",
-    "Shift",
+    "Shift", 
     "Control",
     "Alt",
     "Pause",

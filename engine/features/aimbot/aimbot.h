@@ -10,8 +10,6 @@ void aimbot(Entity entity, FVector3 head_bone) {
   auto dy = head_bone.y - (height / 2);
   auto dist = sqrtf(dx * dx + dy * dy);
 
-  if (settings::aimbot::fov_circle)
-    ImGui::GetBackgroundDrawList()->AddCircle(ImVec2(width / 2, height / 2), settings::aimbot::aim_fov, ImColor(255, 255, 255, 255), 100);
 	
   if (settings::aimbot::aimbot) {
 

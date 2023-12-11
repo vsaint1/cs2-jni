@@ -162,7 +162,6 @@ void render() {
   ImGui::NewFrame();
 
   entity_loop();
-  draw_menu();
 
   ImGui::EndFrame();
   p_Device->SetRenderState(D3DRS_ZENABLE, false);
