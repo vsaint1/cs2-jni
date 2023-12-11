@@ -68,6 +68,8 @@ JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CAimbotConfig_configure(JNIE
   LOG("Visible check: %d", settings::aimbot::visible_check);
   settings::aimbot::fov_circle = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "fovCircle", "Z"));
   LOG("Fov circle: %d", settings::aimbot::fov_circle);
+  hotkeys::aimkey = p_env->GetIntField(jobj, p_env->GetFieldID(clazz, "selectedKey", "I"));
+  LOG("Aim key: %d", hotkeys::aimkey);
 }
 
 JNIEXPORT void JNICALL Java_test_CMemory_cleanup(JNIEnv *p_env, jobject jobj) { process.~Memory(); }
