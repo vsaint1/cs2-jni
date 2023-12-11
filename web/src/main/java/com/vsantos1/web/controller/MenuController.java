@@ -17,10 +17,13 @@ public class MenuController {
     @GetMapping("/menu")
     public ModelAndView menu(CAimbotConfig aimConfig, CEspConfig espConfig,CMiscConfig miscConfig) {
 
+
+        CEngine engine = new CEngine();
         ModelAndView mv = new ModelAndView("views/menu");
         mv.addObject("aimConfig", aimConfig);
         mv.addObject("espConfig", espConfig);
         mv.addObject("miscConfig", miscConfig);
+        mv.addObject("pid", engine.getProcessId());
 
         return mv;
 

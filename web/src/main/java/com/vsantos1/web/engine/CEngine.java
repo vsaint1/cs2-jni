@@ -34,7 +34,7 @@ public class CEngine {
         System.out.println("File " + file.getAbsolutePath() + " loaded");
     }
 
-    public native long getProcessId(String processName);
+    public native long getProcessId();
 
     public native long getModuleBase(String moduleName);
 

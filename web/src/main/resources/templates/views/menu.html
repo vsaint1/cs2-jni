@@ -21,9 +21,9 @@
     </div>
 
     <div class="container-md">
+        <img th:src="@{/img/cs2.webp}" width="100" alt="fds" />
 
-        <p class="text-danger">
-            <img th:src="@{/img/cs2.webp}" width="100" alt="fds" />
+        <p class="text-success" th:text="${pid}">
             1234
         </p>
         <form method="post" th:action="@{/unload}">
