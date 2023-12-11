@@ -72,6 +72,32 @@ JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CAimbotConfig_configure(JNIE
   LOG("Aim key: %d", hotkeys::aimkey);
 }
 
+JNIEXPORT void JNICALL Java_com_vsantos1_web_engine_CEspConfig_configure(JNIEnv *p_env, jobject jobj) {
+  LOG("Configure");
+  jclass clazz = p_env->GetObjectClass(jobj);
+  LOG("Class: %p", clazz);
+  if (clazz == nullptr)
+    return;
+
+  settings::visuals::esp = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "esp", "Z"));
+  LOG("Esp: %d", settings::visuals::esp);
+  settings::visuals::bSkeleton = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "skeleton", "Z"));
+  LOG("Skeleton: %d", settings::visuals::bSkeleton);
+  settings::visuals::bHealth = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "health", "Z"));
+  LOG("Health: %d", settings::visuals::bHealth);
+  settings::visuals::bName = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "name", "Z"));
+  LOG("Name: %d", settings::visuals::bName);
+  settings::visuals::bSnaplines = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "snapLines", "Z"));
+  LOG("Snaplines: %d", settings::visuals::bSnaplines);
+  settings::visuals::bDistance = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "distance", "Z"));
+  LOG("Distance: %d", settings::visuals::bDistance);
+  settings::visuals::bBox = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "box", "Z"));
+  LOG("Box: %d", settings::visuals::bBox);
+  settings::visuals::bWeapon = p_env->GetBooleanField(jobj, p_env->GetFieldID(clazz, "weapon", "Z"));
+  LOG("Weapon: %d", settings::visuals::bWeapon);
+
+}
+
 JNIEXPORT void JNICALL Java_test_CMemory_cleanup(JNIEnv *p_env, jobject jobj) { process.~Memory(); }
 
 JNIEXPORT jlong JNICALL Java_test_CMemory_getProcessId(JNIEnv *p_env, jobject jobj) {
