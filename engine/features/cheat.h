@@ -57,15 +57,16 @@ void cache_entities() {
 
       if (settings::misc::bTeamcheck && local_team == e_team)
         continue;
-      uintptr_t p_gamescene = process.readv<uint64_t>(pcs_pawn + 0x310);
-      uintptr_t p_bonearray = process.readv<uint64_t>(p_gamescene + 0x1E0);
+      // uintptr_t p_gamescene = process.readv<uint64_t>(pcs_pawn + 0x310);
+      // uintptr_t p_bonearray = process.readv<uint64_t>(p_gamescene + 0x1E0);
 
+       bool e_spotted = process.readv<bool>(pcs_pawn + offsets::bSpottedByMask);
       Entity entity;
 
       entity.pawn = pcs_pawn;
-      entity.name = "Unknown";
+      entity.name = "Unknown"; // TODO: read player's name
       entity.health = e_health;
-      entity.visible = false; // TODO: add visible check
+      entity.visible = e_spotted & ( 1 << local_player);
       entity.position = pcs_pos.Distance(local_pos) - 30.0f;
 
       temp.push_back(entity);
@@ -74,7 +75,7 @@ void cache_entities() {
     entities.clear();
     entities = temp;
 
-    // std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    std::this_thread::sleep_for(std::chrono::milliseconds(50));
   }
 }
 
@@ -95,7 +96,7 @@ void entity_loop() {
       FVector3 head;
       head.x = origin.x;
       head.y = origin.y;
-      head.z = origin.z + 90.0f;
+      head.z = origin.z;
 
       FVector3 screen_pos = origin.world_to_screen(local_viewmatrix);
 
@@ -113,13 +114,12 @@ void entity_loop() {
 
       FVector3 head_bone = process.readv<FVector3>(p_bonearray + EBone::Head * 32);
 
-      FVector3 left_arm = process.readv<FVector3>(p_bonearray + EBone::LeftArm * 32);
 
       if (!world_to_screen(head_bone, head_pos, local_viewmatrix))
         continue;
 
       if (screen_pos.z >= 0.01f)
-        draw_esp(left_arm.world_to_screen(local_viewmatrix), screen_pos, entity, p_bonearray, local_viewmatrix);
+        draw_esp(head_pos, screen_pos, entity, p_bonearray, local_viewmatrix);
 
       std::thread(aimbot, entity, head_pos).detach();
     }

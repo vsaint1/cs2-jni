@@ -18,6 +18,9 @@ void aimbot(Entity entity, FVector3 head_bone) {
 
     if (GetAsyncKeyState(hotkeys::aimkey)) {
 
+      if(settings::aimbot::visible_check && !entity.visible)
+        return;
+        
       if (dist < closest_pawn) {
 
         closest_pawn = dist;
