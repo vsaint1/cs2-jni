@@ -22,6 +22,11 @@ void draw_snapline(FVector3 screen_pos, ImColor color) {
 
 }
 
+void draw_text(FVector3 screen_pos, const char* text){
+	ImVec2 TextSize = ImGui::CalcTextSize(text);
+	ImGui::GetForegroundDrawList()->AddText(ImVec2(screen_pos.x - TextSize.x / 2, screen_pos.y - TextSize.y / 2), ImColor(255, 255, 255, 255), text);
+}
+
 void draw_healthbar(FVector3 screen_pos, int health) {
 	const auto color = ImColor(255 - (health * 2.55), health * 2.55, 0, 255);
 
