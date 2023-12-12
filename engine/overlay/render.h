@@ -9,7 +9,6 @@
 #include "../external/includes/imgui/imgui_impl_win32.h"
 #include "../external/includes/imgui/imgui_impl_dx9.h"
 #include "../features/globals.h"
-#include "logo.h"
 #include "../features/menu/menu.h"
 #include "../features/cheat.h"
 
