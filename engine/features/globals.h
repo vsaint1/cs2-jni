@@ -19,9 +19,9 @@ int aimkey;
 static int keystatus = 0;
 
 namespace offsets {
-std::ptrdiff_t dwEntityList = 0x17BB820;
+std::ptrdiff_t dwEntityList = 0x17BB840;
 std::ptrdiff_t dwLocalPlayerPawn = 0x16C2D98;
-std::ptrdiff_t dwViewMatrix = 0x1819FC0;
+std::ptrdiff_t dwViewMatrix = 0x1819FE0;
 std::ptrdiff_t dwPawnHealth = 0x7F8;    // m_iPawnHealth = 0x7F8; // uint32_t
 std::ptrdiff_t dwPlayerPawn = 0x7EC;    // m_hPlayerPawn client.dll.rs
 std::ptrdiff_t dwSanitizedName = 0x640; //  m_iszPlayerName = 0x640; // char[128]
