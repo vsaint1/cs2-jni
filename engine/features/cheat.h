@@ -67,7 +67,7 @@ void cache_entities() {
       entity.name = "Unknown"; // TODO: read player's name
       entity.health = e_health;
       entity.visible = e_spotted & ( 1 << local_player);
-      entity.position = pcs_pos.Distance(local_pos) - 30.0f;
+      entity.position = pcs_pos.Distance(local_pos) / 100;
 
       temp.push_back(entity);
     }
